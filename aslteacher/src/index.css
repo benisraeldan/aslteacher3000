@@ -31,15 +31,21 @@ body {
   margin-left: 1rem;
   border: 1px solid white;
   padding: 6px 12px;
-  font-size: 14px;
+  font-size: 20px;
   line-height: 1.42857143;
   border-radius: 4px;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  color: white;
+  color: black;
 }
+
+.Leveltitle{
+  color: white;
+  margin-top: 1%;
+}
+
 .LearnVideo{
   padding-right: 15px; 
   z-index: -100;
@@ -58,7 +64,13 @@ h3{
   display:inline;
 }
 .centered {
-  position: fixed; /* or absolute */
-  top: 20%;
+  position: absolute; /* or absolute */
+  top: 30%;
   left: 5%;
+}
+
+.table {
+  margin: 0 auto; /* or margin: 0 auto 0 auto */
+  margin-top: 5%;
+  
 }
