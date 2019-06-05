@@ -13,12 +13,13 @@ from aslteacher3000 import ASLModel
 app = Flask(__name__)
 
 folder = "video"
-backend_path = r'E:\projects\aslteacher3000\backend'
+backend_path = r'C:\Users\gural\Desktop\aslTeacher\aslteacher3000\backend'
 
 asl_teacher = ASLModel()
 
 def runSomeMl(vid_path):
     #time.sleep(100)
+	print(vid_path)
 	return asl_teacher.predict(vid_path)
 
 @app.route("/")
@@ -37,10 +38,11 @@ def hello():
 def upload_file():
     if request.method == 'POST':
       f = request.files['file']
-      vid_path = backend_path + "\\" +folder + "\\" + folder + "_" +  str(datetime.datetime.now()).replace(' ', '').replace(':','').replace('-','').replace('.','')
+      vid_path = backend_path + "\\" +folder + "\\" + folder + "_" +  str(datetime.datetime.now()).replace(' ', '').replace(':','').replace('-','').replace('.','') + '.mp4'
       f.save(vid_path)
-      runSomeMl(vid_path)
-      return 'file uploaded successfully'
+      blah = runSomeMl(vid_path)
+      print(blah)
+      return "blah"
 
 	  
 def split_video_to_frames(vid):

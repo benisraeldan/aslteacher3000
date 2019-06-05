@@ -1,6 +1,7 @@
 import numpy as np
 from skvideo.io import FFmpegReader, ffprobe
 from skvideo.utils import rgb2gray
+import skvideo
 from PIL import Image
 from keras.preprocessing import image
 from tqdm import tqdm
@@ -36,7 +37,7 @@ class Videos(object):
                 If the value is 'z-score', then Z-score Normalization will be used.
                 For each pixel p, z_score = (p - mean) / std
         """
-
+        #skvideo.setFFmpegPath('C:\\ProgramData\\Anaconda3\\envs\\py36\\Lib\\site-packages\\ffmpeg\\')
         self.target_size = target_size
         self.to_gray = to_gray
         self.max_frames = max_frames

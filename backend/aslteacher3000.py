@@ -10,7 +10,9 @@ from keras.layers import Conv3D, MaxPooling3D, GlobalAveragePooling3D
 from keras.layers.core import Dense,Dropout
 
 from video import Videos
-
+import tensorflow as tf
+global graph,model
+graph = tf.get_default_graph()
 
 class ASLModel(object):
 	
@@ -24,13 +26,14 @@ class ASLModel(object):
 			
 	def predict(self, vid):
 		self.reader.read_videos([vid])
+		with graph.as_default():
 		
-		return self.model.predict(self.reader.read_videos([vid]),
-			batch_size=None,
-			verbose=0,
-			steps=None,
-			max_queue_size=10,
-			workers=1,
-			use_multiprocessing=False)
-		
+			a = self.model.predict(self.reader.read_videos([vid]),
+				batch_size=None,
+				verbose=0,
+				steps=None,
+				max_queue_size=10,
+				workers=1,
+				use_multiprocessing=False)
+		return a
 		
