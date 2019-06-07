@@ -6,11 +6,14 @@ import math
 import cv2
 from flask import Flask, request, redirect, url_for
 from werkzeug.utils import secure_filename
+from flask_cors import CORS
 
 from video import Videos
 from aslteacher3000 import ASLModel
 
+import json
 app = Flask(__name__)
+CORS(app)
 
 folder = "video"
 backend_path = r'C:\Users\gural\Desktop\aslTeacher\aslteacher3000\backend'
@@ -34,15 +37,15 @@ def hello():
     """
 
 
-@app.route('/uploader', methods = ['GET', 'POST'])
-def upload_file():
-    if request.method == 'POST':
-      f = request.files['file']
-      vid_path = backend_path + "\\" +folder + "\\" + folder + "_" +  str(datetime.datetime.now()).replace(' ', '').replace(':','').replace('-','').replace('.','') + '.mp4'
-      f.save(vid_path)
-      blah = runSomeMl(vid_path)
-      print(blah)
-      return "blah"
+# @app.route('/uploader', methods = ['GET', 'POST'])
+# def upload_file():
+#     if request.method == 'POST':
+#       f = request.files['file']
+#       vid_path = backend_path + "\\" +folder + "\\" + folder + "_" +  str(datetime.datetime.now()).replace(' ', '').replace(':','').replace('-','').replace('.','') + '.mp4'
+#       f.save(vid_path)
+#       blah = runSomeMl(vid_path)
+#       print(blah)
+#       return "blah"
 
 	  
 def split_video_to_frames(vid):
@@ -67,3 +70,32 @@ def split_video_to_frames(vid):
     video.release()
     return vid_path
 
+import time
+import tensorflow
+import base64
+from flask import Flask, request, redirect, url_for
+from werkzeug.utils import secure_filename
+import json
+from datauri import DataURI
+app = Flask(__name__)
+
+	
+@app.route('/uploader', methods = ['GET', 'POST'])
+def upload_file():
+      ans = request.data[31:-2]
+      data= base64.b64decode(ans)
+      vid_path = backend_path + "\\" +folder + "\\" + folder + "_" +  str(datetime.datetime.now()).replace(' ', '').replace(':','').replace('-','').replace('.','') + '.mp4'
+      file = open(vid_path, 'wb')
+      file.write(data)
+      file.close()
+      blah = runSomeMl(vid_path)
+      print(blah)
+      return "blah"  
+	  
+@app.route('/')
+def hello():
+    return "ASL SERVER!"
+	
+
+if __name__ == '__main__':
+    app.run()

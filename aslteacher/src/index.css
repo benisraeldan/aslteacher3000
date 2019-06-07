@@ -1,0 +1,76 @@
+html {
+  font-size: 100%;
+  text-align: center;
+  background-image: linear-gradient(180deg, #0b3e71, #0d64b0);
+  background: #0b3e71;
+  background-image: url(//d35aaqx5ub95lt.cloudfront.net/images/star-pattern.svg), linear-gradient(180deg, #0b3e71, #0d64b0);
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial,
+    sans-serif;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.button{
+  display: inline-block;
+  margin-bottom: 0;
+  font-weight: 400;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  -ms-touch-action: manipulation;
+  touch-action: manipulation;
+  cursor: pointer;
+  background-image: none;
+  margin-left: 1rem;
+  border: 1px solid white;
+  padding: 6px 12px;
+  font-size: 20px;
+  line-height: 1.42857143;
+  border-radius: 4px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  color: black;
+}
+
+.Leveltitle{
+  color: white;
+  margin-top: 1%;
+}
+
+.LearnVideo{
+  padding-right: 15px; 
+  z-index: -100;
+   padding-left: 15px;           
+}
+video{
+  border: 1px solid white;
+  position: inherit;
+  overflow: hidden;
+  z-index: -1;
+}
+h1,h3{
+  color: white;
+}
+h3{
+  display:inline;
+}
+.centered {
+  position: absolute; /* or absolute */
+  top: 30%;
+  left: 5%;
+}
+
+.table {
+  margin: 0 auto; /* or margin: 0 auto 0 auto */
+  margin-top: 5%;
+  
+}
