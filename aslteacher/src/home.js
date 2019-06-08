@@ -7,12 +7,15 @@ import { videos } from "./resources/videosSource";
 import LearningPage from "./learningPage"
 import Test from "./test"
 
+const levelName=["testCloth","testAnimales","testActions","testFood"]
+
 class Home extends Component {
 
 
   constructor(props)
   {
     super(props);
+
     this.renderLearningPage = this.renderLearningPage.bind(this)
     this.renderHome = this.renderHome.bind(this)
     this.backHome = this.backHome.bind(this)
@@ -48,7 +51,7 @@ class Home extends Component {
  
   renderTestPage()
   {
-    return ( <Test videos = {this.state.videosTest} indexLevel = {this.state.indexLevel} onClickBackHome ={this.backHome} onBackLearningPage={(index)=>this.changeLearningPage(index)} />)
+    return ( <Test videos = {this.state.videosTest} indexLevel = {this.state.indexLevel} testName={levelName[this.state.indexLevel]} onClickBackHome ={this.backHome} onBackLearningPage={(index)=>this.changeLearningPage(index)} />)
   }
 
   renderHome()
