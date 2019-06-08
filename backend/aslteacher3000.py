@@ -16,8 +16,8 @@ graph = tf.get_default_graph()
 
 class ASLModel(object):
 	
-	def __init__(self):
-		self.model = load_model('Model_1.weights.best.hdf5')
+	def __init__(self, model):
+		self.model = load_model(model)
 		self.reader = Videos(target_size=(128, 128), 
                 to_gray=True, 
                 max_frames=23, 

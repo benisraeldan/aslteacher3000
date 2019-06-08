@@ -19,11 +19,25 @@ folder = "video"
 backend_path = r'C:\Users\gural\Desktop\aslTeacher\aslteacher3000\backend'
 
 asl_teacher = ASLModel()
+tests = {}
+test["actions"] = ASLModel("actions.h5")
+test["clothes"] = ASLModel("clothes.h5")
+test["foods"] = ASLModel("foods.h5")
+test["animals"] = ASLModel("animals.h5")
 
-def runSomeMl(vid_path):
+def runSomeMl(vid_path, type):
     #time.sleep(100)
 	print(vid_path)
-	return asl_teacher.predict(vid_path)
+	return test["annimals"].predict(vid_path)
+	
+def saveIncomingFile(request):
+	ans = request.data[31:-2]
+	data= base64.b64decode(ans)
+	vid_path = backend_path + "\\" +folder + "\\" + folder + "_" +  str(datetime.datetime.now()).replace(' ', '').replace(':','').replace('-','').replace('.','') + '.mp4'
+	file = open(vid_path, 'wb')
+	file.write(data)
+	file.close()
+	return vid_path
 
 @app.route("/")
 def hello():
@@ -92,6 +106,26 @@ def upload_file():
       print(blah)
       return "blah"  
 	  
+@app.route('/testAnimals', methods = ['GET', 'POST'])
+def test_animals():
+	vid_path = saveIncomingFile(request)
+	return runSomeMl(vid_path, "animals")
+	
+@app.route('/testActions', methods = ['GET', 'POST'])
+def test_animals():
+	vid_path = saveIncomingFile(request)
+	return runSomeMl(vid_path, "actions")
+	
+@app.route('/testClothes', methods = ['GET', 'POST'])
+def test_animals():
+	vid_path = saveIncomingFile(request)
+	return runSomeMl(vid_path, "clothes")
+
+@app.route('/testFoods', methods = ['GET', 'POST'])
+def test_animals():
+	vid_path = saveIncomingFile(request)
+	return runSomeMl(vid_path, "foods")
+	
 @app.route('/')
 def hello():
     return "ASL SERVER!"
