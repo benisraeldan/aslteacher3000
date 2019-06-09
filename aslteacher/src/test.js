@@ -7,7 +7,7 @@ import MediaStreamRecorder from 'msr';
 
 const RECORDING_ERROR = "Unable to capture your camera. Please check console logs.";
 const MINE_TYPE = "video/mp4";
-const API_UPLOADER_PATH = 'http://localhost:5000/uploader';
+const PORT_PATH = 'http://localhost:5000/';
 const RECORDING_TIME = 3000;
 
 
@@ -40,7 +40,7 @@ class App extends Component {
     {
       let reader = new FileReader();
       reader.onload = function(){
-      this.sendingDataToServer(reader.result)
+      this.sendingDataToServer(reader.result,this.props.testName)
       }.bind(this);
         reader.readAsDataURL(blob);
       }.bind(this)
@@ -56,10 +56,11 @@ class App extends Component {
 }
 
 
-sendingDataToServer(data)
+sendingDataToServer(data,testName)
 {
-  axios.post(API_UPLOADER_PATH,{data}).then(function (res){
-    console.log(res)
+ 
+  axios.post(PORT_PATH+testName,{data}).then(function (res){
+    alert(res);
   })
 }
 
