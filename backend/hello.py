@@ -20,10 +20,10 @@ backend_path = r'C:\Users\gural\Desktop\aslTeacher\aslteacher3000\backend'
 
 asl_teacher = ASLModel()
 tests = {}
-test["actions"] = ASLModel("actions.h5")
-test["clothes"] = ASLModel("clothes.h5")
-test["foods"] = ASLModel("foods.h5")
-test["animals"] = ASLModel("animals.h5")
+test["actions"] = ASLModel("actions.h5", ["cut", "fly", "sleep", "stand"])
+test["clothes"] = ASLModel("clothes.h5", ["boots","bra","bracelet","shirt"])
+test["foods"] = ASLModel("foods.h5", ["bread", "cereal", "french-fries", "pancake"])
+test["animals"] = ASLModel("animals.h5", ["alligator", "bull", "mouse", "tiger"])
 
 def runSomeMl(vid_path, type):
     #time.sleep(100)
@@ -49,18 +49,6 @@ def hello():
          <input type = "submit"/>
       </form>
     """
-
-
-# @app.route('/uploader', methods = ['GET', 'POST'])
-# def upload_file():
-#     if request.method == 'POST':
-#       f = request.files['file']
-#       vid_path = backend_path + "\\" +folder + "\\" + folder + "_" +  str(datetime.datetime.now()).replace(' ', '').replace(':','').replace('-','').replace('.','') + '.mp4'
-#       f.save(vid_path)
-#       blah = runSomeMl(vid_path)
-#       print(blah)
-#       return "blah"
-
 	  
 def split_video_to_frames(vid):
     video = cv2.VideoCapture(secure_filename(vid.filename))    
@@ -93,7 +81,8 @@ import json
 from datauri import DataURI
 app = Flask(__name__)
 
-	
+
+# legacy code
 @app.route('/uploader', methods = ['GET', 'POST'])
 def upload_file():
       ans = request.data[31:-2]
@@ -106,7 +95,7 @@ def upload_file():
       print(blah)
       return "blah"  
 	  
-@app.route('/testAnimals', methods = ['GET', 'POST'])
+@app.route('/testAnimales', methods = ['GET', 'POST'])
 def test_animals():
 	vid_path = saveIncomingFile(request)
 	return runSomeMl(vid_path, "animals")
@@ -116,12 +105,12 @@ def test_animals():
 	vid_path = saveIncomingFile(request)
 	return runSomeMl(vid_path, "actions")
 	
-@app.route('/testClothes', methods = ['GET', 'POST'])
+@app.route('/testCloth', methods = ['GET', 'POST'])
 def test_animals():
 	vid_path = saveIncomingFile(request)
 	return runSomeMl(vid_path, "clothes")
 
-@app.route('/testFoods', methods = ['GET', 'POST'])
+@app.route('/testFood', methods = ['GET', 'POST'])
 def test_animals():
 	vid_path = saveIncomingFile(request)
 	return runSomeMl(vid_path, "foods")
