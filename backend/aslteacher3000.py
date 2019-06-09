@@ -16,8 +16,9 @@ graph = tf.get_default_graph()
 
 class ASLModel(object):
 	
-	def __init__(self):
-		self.model = load_model('Model_1.weights.best.hdf5')
+	def __init__(self, model, classes):
+		self.classes = classes
+		self.model = load_model(model)
 		self.reader = Videos(target_size=(128, 128), 
                 to_gray=True, 
                 max_frames=23, 
@@ -35,5 +36,13 @@ class ASLModel(object):
 				max_queue_size=10,
 				workers=1,
 				use_multiprocessing=False)
-		return a
+		return _find_class(a)
+		
+	def _find_class(self, probability):
+		max_i = 0
+		for i in range(0, len(classes)):
+			if( probability[i] > probability[max_i]):
+				max_i = i
+			
+		return self.classes[max_i];
 		
