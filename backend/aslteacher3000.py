@@ -40,7 +40,7 @@ class ASLModel(object):
 		
 	def _find_class(self, probability):
 		max_i = 0
-		for i in range(0, len(classes)):
+		for i in range(0, len(self.classes)):
 			if( probability[i] > probability[max_i]):
 				max_i = i
 			
