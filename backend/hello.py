@@ -18,7 +18,7 @@ CORS(app)
 folder = "video"
 backend_path = r'C:\Users\gural\Desktop\aslTeacher\aslteacher3000\backend'
 
-asl_teacher = ASLModel()
+# asl_teacher = ASLModel()
 tests = {}
 test["actions"] = ASLModel("actions.h5", ["cut", "fly", "sleep", "stand"])
 test["clothes"] = ASLModel("clothes.h5", ["boots","bra","bracelet","shirt"])
