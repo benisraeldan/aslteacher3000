@@ -101,17 +101,17 @@ def test_animals():
 	return runSomeMl(vid_path, "animals")
 	
 @app.route('/testActions', methods = ['GET', 'POST'])
-def test_animals():
+def test_actions():
 	vid_path = saveIncomingFile(request)
 	return runSomeMl(vid_path, "actions")
 	
 @app.route('/testCloth', methods = ['GET', 'POST'])
-def test_animals():
+def test_clothes():
 	vid_path = saveIncomingFile(request)
 	return runSomeMl(vid_path, "clothes")
 
 @app.route('/testFood', methods = ['GET', 'POST'])
-def test_animals():
+def test_food():
 	vid_path = saveIncomingFile(request)
 	return runSomeMl(vid_path, "foods")
 	
