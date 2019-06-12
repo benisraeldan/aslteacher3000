@@ -19,16 +19,16 @@ folder = "video"
 backend_path = r'C:\Users\gural\Desktop\aslTeacher\aslteacher3000\backend'
 
 # asl_teacher = ASLModel()
-tests = {}
-test["actions"] = ASLModel("actions.h5", ["cut", "fly", "sleep", "stand"])
-test["clothes"] = ASLModel("clothes.h5", ["boots","bra","bracelet","shirt"])
-test["foods"] = ASLModel("foods.h5", ["bread", "cereal", "french-fries", "pancake"])
-test["animals"] = ASLModel("animals.h5", ["alligator", "bull", "mouse", "tiger"])
+test = {}
+test["actions"] = ASLModel("actions.hdf5", ["cut", "fly", "sleep", "stand"])
+test["clothes"] = ASLModel("clothes.hdf5", ["boots","bra","bracelet","shirt"])
+test["foods"] = ASLModel("foods.hdf5", ["bread", "cereal", "french-fries", "pancake"])
+test["animals"] = ASLModel("animals.hdf5", ["alligator", "bull", "mouse", "tiger"])
 
 def runSomeMl(vid_path, type):
     #time.sleep(100)
 	print(vid_path)
-	return test["annimals"].predict(vid_path)
+	return test[type].predict(vid_path)
 	
 def saveIncomingFile(request):
 	ans = request.data[31:-2]
@@ -107,6 +107,7 @@ def test_actions():
 	
 @app.route('/testCloth', methods = ['GET', 'POST'])
 def test_clothes():
+	print("bb")
 	vid_path = saveIncomingFile(request)
 	return runSomeMl(vid_path, "clothes")
 

@@ -36,10 +36,12 @@ class ASLModel(object):
 				max_queue_size=10,
 				workers=1,
 				use_multiprocessing=False)
-		return _find_class(a)
+		b = self._find_class(a[0])
+		print(b)
+		return str(b)
 		
 	def _find_class(self, probability):
-		max_i = 0
+		max_i = 0		
 		for i in range(0, len(self.classes)):
 			if( probability[i] > probability[max_i]):
 				max_i = i

@@ -60,7 +60,7 @@ sendingDataToServer(data,testName)
 {
  
   axios.post(PORT_PATH+testName,{data}).then(function (res){
-    alert(res);
+    alert(res.data);
   })
 }
 
