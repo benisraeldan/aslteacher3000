@@ -18,53 +18,53 @@ import pancake from "./4/PANCAKE.mp4";
 
 export const videos = [
     [{
-        "key": "boots",
+        "key": "Boots",
         "value": boots
     }, {
-        "key": "bra",
+        "key": "Bra",
         "value": bra
     }, {
-        "key": "shirt",
+        "key": "Shirt",
         "value": shirt
     }, {
-        "key": "bracelet",
+        "key": "Bracelet",
         "value": bracelet
     }],
     [{
-        "key": "alligator",
+        "key": "Alligator",
         "value": alligator
     }, {
-        "key": "bull",
+        "key": "Bull",
         "value": bull
     }, {
-        "key": "tiger",
+        "key": "Tiger",
         "value": tiger
     }, {
-        "key": "mouse",
+        "key": "Mouse",
         "value": mouse
     }],[{
-        "key": "cut",
+        "key": "Cut",
         "value": cut
     }, {
-        "key": "fly",
+        "key": "Fly",
         "value": fly
     }, {
-        "key": "sleep",
+        "key": "Sleep",
         "value": sleep
     }, {
-        "key": "stand",
+        "key": "Stand",
         "value": stand
     }],[{
-        "key": "bread",
+        "key": "Bread",
         "value": bread
     }, {
-        "key": "cereal",
+        "key": "Cereal",
         "value": cereal
     }, {
-        "key": "french fries",
+        "key": "French fries",
         "value": frenc_fries
     }, {
-        "key": "pancake",
+        "key": "Pancake",
         "value": pancake
     }],
 ];

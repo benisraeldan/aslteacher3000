@@ -1,6 +1,8 @@
 
 import './index.css';
 import React,{Component} from 'react'
+import {   ReactComponent as Reply  } from './Images/reply.svg';
+import {   ReactComponent as Test  } from './Images/testImage.svg';
 
 
 
@@ -19,13 +21,14 @@ class LearningPage extends Component
         
         return (<div>
             <h1 className="Leveltitle">Level - {this.props.level}</h1>
+            <h3 >Watch the videos and then go to the test</h3>>
             <table className="table">
                 <tr>
             {videos.map((obj,index)=>{
               return (
               <td >
                   <tr>
-                  <video height="250" width="250" controls>        
+                  <video height="250"  controls>        
                     <source src={obj.value} type="video/mp4"/>
                         Your browser does not support HTML5 video.
                     </video>
@@ -49,10 +52,10 @@ class LearningPage extends Component
             <table className="table">
                 <tr>
                     <td>
-                    <button className="button" onClick = {onClickBackHome}>Home</button>
+                    <button className="transparentButton" onClick = {onClickBackHome}><Reply/></button>
                     </td>
                     <td>
-                    <button className="button" onClick = {(event)=>onClickGoTest(videos,level-1)}>Test</button>
+                    <button className="transparentButton" onClick = {(event)=>onClickGoTest(videos,level-1)}><Test/></button>
                     </td>
                 </tr>
             </table>

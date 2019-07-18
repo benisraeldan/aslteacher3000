@@ -4,6 +4,9 @@ import './index.css';
 import { videos } from "./resources/videosSource";
 import axios from 'axios';
 import MediaStreamRecorder from 'msr';
+import {   ReactComponent as Reply  } from './Images/reply.svg';
+import {   ReactComponent as College } from './Images/open-book.svg';
+import {   ReactComponent as Play } from './Images/youtube-play-button.svg';
 
 const RECORDING_ERROR = "Unable to capture your camera. Please check console logs.";
 const MINE_TYPE = "video/mp4";
@@ -14,12 +17,14 @@ const RECORDING_TIME = 3000;
 class App extends Component {  
   constructor(props){
     super(props);
-    this.state = {current:0}
+    this.state = {current:0,videoVis:"hidden",playVis:"visible"}
     this.video={};
     this.videos = this.props.videos;
+    this.videoHeight = 0;
     this.stream=null;   
     this.mediaRecorder=null;
     this.bindFunctions = this.bindFunctions.bind(this);
+    this.afterStartRecordingClick = this.afterStartRecordingClick.bind(this)
     this.bindFunctions();   
   }
 
@@ -28,10 +33,12 @@ class App extends Component {
     this.afterStartRecordingClick = this.afterStartRecordingClick.bind(this);
     this.openClientCaptureVideoOnScreen = this.openClientCaptureVideoOnScreen.bind(this);
     this.stopRecording = this.stopRecording.bind(this);
+    this.stopRecording = this.stopRecording.bind(this);
     this.sendingDataToServer = this.sendingDataToServer.bind(this);
   }
 
   afterStartRecordingClick(event) {
+    this.setState({playVis:"hidden",videoVis:"visible"}) 
     navigator.mediaDevices.getUserMedia({ video: true }).then(function(stream) {
     this.stream = stream;
     this.mediaRecorder = new MediaStreamRecorder(this.stream);
@@ -58,25 +65,39 @@ class App extends Component {
 
 sendingDataToServer(data,testName)
 {
- 
+  const {current} = this.state
   axios.post(PORT_PATH+testName,{data}).then(function (res){
-    alert(res);
-  })
+    this.setState({current: (current + 1) % 4});
+
+    if(res!==current){
+      alert("You wrong !");
+    }
+    else
+    {
+      alert("You right !");
+    }
+    
+  }.bind(this))
 }
 
  openClientCaptureVideoOnScreen()
   {
+    
     this.video = document.querySelector('video');
     this.video.muted = true;
     this.video.volume = 0;
-    this.video.srcObject = this.stream;
+    this.video.height = 500;
+    this.video.srcObject = this.stream;    
   }
 
    stopRecording(){
-    const {current} = this.state
-    this.stream.stop() 
+    
+    console.log(this.video.height)
+    this.videoHeight = Number(this.video.height);
+        this.stream.stop() 
     this.mediaRecorder.stop()
-    this.setState({current: (current + 1) % 4});   
+    this.video.height = 0;
+    this.setState({playVis:"visible",videoVis:"hidden"}) 
     }
 
 
@@ -92,26 +113,41 @@ sendingDataToServer(data,testName)
               <tr>
               <td >
               <tr>
-                  <h1>Make the sign for : {this.videos[current].key}</h1>   
+                  <h1 >Make the sign for : {this.videos[current].key}</h1> 
+
+                  <h3 style={{visibility :this.state.playVis}}>Press on the play button to film yourself</h3>   
                 </tr>
               <tr>
-                  <video controls autoPlay playsInline></video>
+              
+                  <video style={{visibility :this.state.videoVis}} controls autoPlay playsInline></video>
               </tr>
                 <tr>
                  
-                  <button className = "button"  style={{padding:"20px"}} onClick={this.afterStartRecordingClick}>Start Recording</button>
+                  <button className = "transparentButton" style={{visibility :this.state.playVis}}  onClick={this.afterStartRecordingClick}><Play/></button>
             </tr>
             </td>
             </tr>
             </table> 
 
-            <div style={{padding:"20px"}}>
+           
+
           
-              <button className = "button"   onClick={(event)=>onClickBackHome()}>Home</button>
-              <button className = "button"   onClick={(event)=>{onBackLearningPage(this.props.indexLevel)}}>Back to learning</button>
+                <button  float="left" className = "transparentButton"   onClick={(event)=>{onBackLearningPage(this.props.indexLevel)}}><Reply/></button>
+                
+                <button  float="right"className = "transparentButton"   onClick={(event)=>onClickBackHome()}><College/></button>
+              
+             
+       
+
+             
+          
+           
+         
 
               
-              </div>    
+
+              
+                 
       </div>
     );
   }

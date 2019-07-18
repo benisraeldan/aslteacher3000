@@ -7,19 +7,21 @@ import {   ReactComponent as Shirt  } from './Images/casual-t-shirt.svg';
 import {   ReactComponent as Tiger  } from './Images/tiger.svg';
 import {   ReactComponent as Man  } from './Images/man.svg';
 import {   ReactComponent as Burger  } from './Images/burger.svg';
-import {   ReactComponent as College } from './Images/open-book.svg';
 import { videos } from "./resources/videosSource";
+import {   ReactComponent as Reply  } from './Images/reply.svg';
 
 import LearningPage from "./learningPage"
 import Test from "./test"
-import LevelsMenu from "./levelsMenu";
 
 const levelName=["testCloth","testAnimales","testActions","testFood"]
-const buttonLevelTitle1 =["Clothes","Animals","Actions","Food"]
-const buttonLevelTitle =[<Shirt />,<Tiger />,<Man/>,<Burger/>]
+
+const buttonLevelTitle =[{title:"Clothes",icon:<Shirt />},
+                          {title:"Animals",icon:<Tiger />},
+                          {title:"Actions",icon:<Man/>},
+                          {title:"Food",icon:<Burger/>}]
 
 
-class Home extends Component {
+class LevelsMenu extends Component {
 
 
   constructor(props)
@@ -30,17 +32,11 @@ class Home extends Component {
     this.renderHome = this.renderHome.bind(this)
     this.backHome = this.backHome.bind(this)
     this.goTest = this.goTest.bind(this)
-    this.onBackHome = this.onBackHome.bind(this)
     this.changeLearningPage = this.changeLearningPage.bind(this)
     this.renderTestPage = this.renderTestPage.bind(this)
     this.state = {currentPage:-1,videosTest :null,indexLevel:-1}
   }
   
-
-  onBackHome()
-  {
-    this.setState({currentPage:-1})
-  }
 
 
   renderLearningPage()
@@ -61,13 +57,15 @@ class Home extends Component {
   changeLearningPage(index)
   {
     
-    this.setState({currentPage:1})
+    this.setState({currentPage:index})
   }
+
+  
 
  
   renderTestPage()
   {
-    return (<LevelsMenu BackHome={this.onBackHome}/>)
+    return ( <Test videos = {this.state.videosTest} indexLevel = {this.state.indexLevel} testName={levelName[this.state.indexLevel]} onClickBackHome ={this.backHome} onBackLearningPage={(index)=>this.changeLearningPage(index)} />)
   }
 
   renderHome()
@@ -75,27 +73,64 @@ class Home extends Component {
     return(
     
       <div>        
-      <World className="WorldLogo"/>
       
-     
-      <div style={{contentAligment:"center"}}>
-      <h1>Learn ASL easily and fun</h1>
-      <h3> Click on the book to start learn</h3>
-       <br/>
-       <br/>
-      
-    
+        <div style={{contentAligment:"center"}}>
 
-        
+        <h1>Categotries</h1>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+          <table align="center">
+            <body>
+            <tr>
 
-      <div className="divBook">
+            <div>        
+            {videos.map((video,index)=>{
+
+          return (
+            <th>
+            <div>
             
-      <button  className="transparentButton"  onClick={(event)=>this.changeLearningPage()}><College/></button> 
+              <button className="transparentButton"  onClick={(event)=>this.changeLearningPage(index)}>
+              <table>
+                <tr>
+                  <th>
+                  {buttonLevelTitle[index].icon}
+                  </th>
+                </tr>
+                <tr>
+                  <th>
+                  {buttonLevelTitle[index].title}
+                  </th>
+                </tr>
+              </table>
+              </button> 
             </div>
+            </th>
+           )
+          
+        })}
+        </div>
+
+        </tr>
+        </body>
+          </table>
         
-       
-      </div>                
-       </div>)
+        </div>
+
+        <div style={{padding:"25px 0px 0px 0px"}}>
+          
+          <button className="transparentButton" onClick = {(event)=>this.props.BackHome()}><Reply/></button>
+          </div>
+
+      </div>           
+      
+
+ 
+      )
     
   }
 
@@ -109,7 +144,7 @@ class Home extends Component {
         return this.renderHome()
         break;
       }
-      case 1:
+      case 5:
       {
         return this.renderTestPage()
         break;
@@ -124,4 +159,4 @@ class Home extends Component {
   }
 }
 
-export default Home;
+export default LevelsMenu;

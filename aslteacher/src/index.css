@@ -17,6 +17,28 @@ body {
   line-height: 1.5;
 }
 
+.transparentButton{
+ background-color: transparent;
+ border: #0d64b0;
+ margin-bottom: 10%;
+
+ 
+}
+
+.divBook
+{
+  background-color: transparent;
+  border: #0d64b0;
+  margin-bottom: 10%;
+
+}
+
+.tableIcons{
+ justify-content: center;
+ align-items: center;
+ align-content: center;
+}
+
 .button{
   display: inline-block;
   margin-bottom: 0;
@@ -57,8 +79,12 @@ video{
   overflow: hidden;
   z-index: -1;
 }
-h1,h3{
+h1,h2,h3{
   color: white;
+}
+
+.WorldLogo{
+  margin: 25px 0 0 0;
 }
 h3{
   display:inline;
